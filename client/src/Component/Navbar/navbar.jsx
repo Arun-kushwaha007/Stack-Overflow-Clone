@@ -4,6 +4,8 @@ import { useSelector, useDispatch} from 'react-redux'
 import bars from '../../Assets/bars-solid.svg'
 import logo from '../../Assets/logo.png'
 import search from '../../Assets/search-solid.svg'
+import Avatar from '../Avatar/Avatar';
+import './navbar.css'
 
 function navbar() {
     var User = null;
@@ -24,6 +26,20 @@ function navbar() {
                     <input type="text" placeholder="Search..." />
                     <img src={search} alt="search" width='18' className='search-icon' />
                 </form>
+            </div>
+            <div className="navbar-2">
+                { User=== null ?(
+                    <Link to='/' className='nav-item nav-links'>
+                        Log in
+                    </Link>
+                ): (
+                    <>
+                    <Avatar backgroundColor='#009dff' px='10px' py='7px' borderRadius='50%' color='white'>
+                        <Link to='' style={{color:"white", textDecoration: "none"}}></Link>
+                    </Avatar>
+                    <button className="nav-item nav-links">Log out</button>
+                    </>
+                )}
             </div>
         </div>
     </nav>

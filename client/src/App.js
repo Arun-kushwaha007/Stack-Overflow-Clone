@@ -2,7 +2,8 @@
 import './App.css';
 import Navbar from './Component/Navbar/navbar';
 import { useEffect, useState } from 'react';
-
+import { BrowserRouter as Router } from 'react-router-dom';
+import Allroutes from './Allroutes'
 function App() {
   const [slideIn , SetslideIn] = useState(true);
   useEffect(() =>{
@@ -19,7 +20,11 @@ function App() {
 
   return (
     <div className="App">
+      <Router>
+
       <Navbar handleSlideIn={handleSlideIn}/>
+      <Allroutes slideIn={slideIn} handleSlideIn={handleSlideIn}/>
+      </Router>
     </div>
   );
 }
