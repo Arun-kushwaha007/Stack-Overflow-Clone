@@ -3,9 +3,15 @@ import Leftsidebar from '../../Component/Leftsidebar/Leftsidebar'
 import Rightsidebar from '../../Component/Rightsidebar/Rightsidebar'
 import Homemainbar from '../../Component/Homemainbar/Homemainbar'   
 import '../../App.css'
-const Home = () => {
+const Home = ({slideIn}) => {
   return (
-    <div>Home</div>
+    <div className="home-container-1">
+        <Leftsidebar slideIn={slideIn} />
+        <div className="home-container-1">
+            <Homemainbar/>
+            <Rightsidebar/>
+        </div>
+    </div>
   )
 }
 

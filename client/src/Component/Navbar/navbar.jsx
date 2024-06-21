@@ -7,12 +7,12 @@ import search from '../../Assets/search-solid.svg'
 import Avatar from '../Avatar/Avatar';
 import './navbar.css'
 
-function navbar() {
+function navbar({handleSlideIn}) {
     var User = null;
   return (
     <nav className="main-nav">
         <div className="navbar">
-            <button className="slide-in-icon">
+            <button className="slide-in-icon" onClick={()=> handleSlideIn()}>
                 <img src={bars} alt="bars" width='15' />
             </button>
             <div className="navbar-1">
