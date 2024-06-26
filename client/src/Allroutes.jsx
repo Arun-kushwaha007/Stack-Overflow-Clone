@@ -11,8 +11,8 @@ function Allroutes({slideIn,handleSlideIn}) {
         <Route path='/' element={<Home slideIn={slideIn} handleSlideIn={handleSlideIn} />} />
         <Route path='/Askquestion' element={<Askquestion />}/>
         <Route path='/Auth' element={<Auth />}/>
-        <Route path='/Question' element={<Question slideIn={slideIn} handleSlideIn={handleSlideIn} />} />
-        <Route path='/Question/:id' element={<Displayquestion slideIn={slideIn} handleSlideIn={handleSlideIn} />} />
+        <Route path='/Questions' element={<Question slideIn={slideIn} handleSlideIn={handleSlideIn} />} />
+        <Route path='/Questions/:id' element={<Displayquestion slideIn={slideIn} handleSlideIn={handleSlideIn} />} />
     </Routes>
   )
 }

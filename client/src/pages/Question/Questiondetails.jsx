@@ -6,11 +6,37 @@ import downvote from '../../Assets/sort-down.svg'
 import './Question.css'
 import Avatar from '../../Component/Avatar/Avatar'
 import Displayanswer from './Displayanswer';
-import { Link, useNavigate , useLocation} from 'react-router-dom';
+import { Link, useNavigate , useLocation, useParams} from 'react-router-dom';
 
 const Questiondetails = () => {
   const [answer, setanswer] = useState("");
-  const questionlist = null;
+  const questionlist = [{
+    "_id":"q1",
+    "questiontitle": "loremkladnfads fl kfjaslkfjdfja",
+    "questionbody":"ki difaijfdsij  dfdkfdkf kfjdfkj fj d",
+    "questiontags": ["pyt","ddkfj","Binary search"],
+    "noofanswers": 2,
+    "upvote":["user123", "userer32"],
+    "downvote":[ " user87"],
+    "userposted": "codenewbie",
+    "userid": "ul3434",
+    "askedon":"2024-06-10T12:00:00Z",
+    "answer":[
+      {
+        "answerbody": "kasdfjeifja difj fjdkfj kfjdjfk",
+        "useranswered": "algoexper",
+        "userid":"u3487",
+        "answeredon":"2024-06-10T12:00:00Z"
+      },
+      {
+        "answerbody": "jkfja kadj d fdkfjakj jeifja difj fjdkfj kfjdjfk",
+        "useranswered": "techguru",
+        "userid":"u39887",
+        "answeredon":"2024-06-10T12:00:00Z"
+      }
+    ]
+  }];
+  const {id} = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const user = null;
@@ -92,7 +118,7 @@ const Questiondetails = () => {
                       </div>
                       <div>
                         <p>Asked {moment(question.askedon).fromNow()}</p>
-                        <Link to={`Users/${question.userid}`} className='user-link' style={{color:"#0086d8"}}>
+                        <Link to={`Users/$question.userid)`} className='user-link' style={{color:"#0086d8"}}>
                         <Avatar backgroundColor="orange" px="8px" py="5px" borderRadius="4px">
                           {question.userposted.charAt(0).toUpperCase()}
                         </Avatar>
