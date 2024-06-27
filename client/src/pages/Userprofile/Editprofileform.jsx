@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import './Userprofile.css'
 
 const Editprofileform = ({currentuser,setSwitch}) => {
     const [name, setname] = useState(currentuser?.name);
