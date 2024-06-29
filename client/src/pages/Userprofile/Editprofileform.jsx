@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Userprofile.css'
+// import { set } from 'mongoose';
 
 const Editprofileform = ({currentuser,setSwitch}) => {
     const [name, setname] = useState(currentuser?.name);
@@ -25,6 +26,11 @@ const Editprofileform = ({currentuser,setSwitch}) => {
             <label htmlFor="about">
             <h3>About me</h3>
             <textarea name="" id="about" cols="30" rows="10" value={about} onChange={(e)=>setabout(e.target.value)}></textarea>
+            </label>
+            <label htmlFor="tags">
+                <h3>Watched tags</h3>
+                <p>Add tags separated by 1 space</p>
+                <input type="text" name="" id="tags" onChange={(e)=> settags(e.target.value.split(" "))} />
             </label>
             <br />
             <input type="submit" className='user-submit-btn' value="save profile" />

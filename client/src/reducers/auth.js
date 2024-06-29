@@ -1,4 +1,4 @@
-const authreducer = (state={data:null},action)=>{
+const authreducer = (state={data:null},action)=> {
     switch(action.type){
         case "AUTH":
             localStorage.setItem("Profile",JSON.stringify({...action?.data}));
@@ -11,7 +11,7 @@ const authreducer = (state={data:null},action)=>{
 
 
         default:
-            break;
+            return state;
     }
 }
 
