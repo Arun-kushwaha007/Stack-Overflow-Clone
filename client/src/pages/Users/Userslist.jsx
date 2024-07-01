@@ -1,26 +1,23 @@
 import React from 'react';
-import './Users.css'
+import './Users.css';
 import User from './User';
+import { useSelector } from 'react-redux';
+
+// This component is used to display a list of users
 
 const Userslist = () => {
-    const users = [{
-        "_id":"u3242",
-        "name":"user1",
-        "email":"user1",
-        "password":"123",
-        "about": "dfkal kialkdoia ",
-        "tags": ["js", "python"],
-        "answered": 10,
-        "joinedon": "2024-05-10T08:00:00Z"
-    }]
+  const users = useSelector((state) => state.usersReducer);
+  console.log(users);
+
   return (
     <div className="users-list-container">
-        {users.map((user)=>(
-            <User user={user} key={user?._id} />
-
-        ))}
+      {Array.isArray(users) && users.length > 0 ? (
+        users.map((user) => <User user={user} key={user?._id} />)
+      ) : (
+        <p>No users available</p>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default Userslist
+export default Userslist;

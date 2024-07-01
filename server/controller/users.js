@@ -23,7 +23,7 @@ export const getallusers = async(req,res)=>{
 
 export const updatedprofile = async(req,res)=>{
     const {id: _id} = req.params;
-    cosnt {name, about, tags} = req.body;
+    const {name, about, tags} = req.body;
     if(!mongoose.Types.ObjectId.isValid(_id)){
         return res.status(404).send("No user with that id");
     }
