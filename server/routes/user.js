@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import express from "express"
 // const express = require('express')
 import { login,signup } from "../controller/auth.js"
@@ -16,3 +17,5 @@ router.patch("/update/:id",auth,updatedprofile)
 
 
 export default router
+=======
+>>>>>>> parent of 7cbe3ca (server auth)
