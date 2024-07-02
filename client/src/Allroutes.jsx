@@ -7,7 +7,6 @@ import Question from './pages/Question/Question';
 import Displayquestion from './pages/Question/Displayquestion';
 import Tags from './pages/Tags/Tags';
 import Users from './pages/Users/Users';
-import Userprofile from './pages/Userprofile/Userprofile';
 function Allroutes({slideIn,handleSlideIn}) {
   return (
     <Routes>
@@ -18,7 +17,6 @@ function Allroutes({slideIn,handleSlideIn}) {
         <Route path='/Question/:id' element={<Displayquestion slideIn={slideIn} handleSlideIn={handleSlideIn} />} />
         <Route path='/Tags' element={<Tags slideIn={slideIn} handleSlideIn={handleSlideIn} />} />
         <Route path='/Users' element={<Users slideIn={slideIn} handleSlideIn={handleSlideIn} />} />
-        <Route path='/Users/:id' element={<Userprofile slideIn={slideIn} handleSlideIn={handleSlideIn} />} />
     </Routes>
   )
 }
