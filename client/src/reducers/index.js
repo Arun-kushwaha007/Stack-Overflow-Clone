@@ -1,10 +1,10 @@
-import {combineReducers} from "redux"
-import authreducer from "./auth.js"
-import currentuserreducer from "./currentuser.js";
-import usersReducer from "./users.js";
+import { combineReducers } from "redux";
+import authreducer from "./auth";
+import currentuserreducer from "./currentuser";
+import usersReducer from "./users";
 
 export default combineReducers({
     authreducer,
     currentuserreducer,
-    usersReducer
+    usersReducer,
 });
