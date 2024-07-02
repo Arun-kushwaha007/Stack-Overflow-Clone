@@ -1,17 +1,16 @@
-import React from 'react';
+import React from 'react'
 import Leftsidebar from '../../Component/Leftsidebar/Leftsidebar'
 import Rightsidebar from '../../Component/Rightsidebar/Rightsidebar'
-import Homemainbar from '../../Component/Homemainbar/Homemainbar'   
+import Homemainbar from '../../Component/Homemainbar/Homemainbar'
 import '../../App.css'
-
-const Question = ({slideIn}) => {
+const Question = ({slidein}) => {
   return (
     <div className="home-container-1">
-        <Leftsidebar slideIn={slideIn} />
-        <div className="home-container-1">
-            <Homemainbar/>
-            <Rightsidebar/>
-        </div>
+      <Leftsidebar slidein={slidein}/>
+      <div className="home-container-2">
+        <Homemainbar/>
+        <Rightsidebar/>
+      </div>
     </div>
   )
 }

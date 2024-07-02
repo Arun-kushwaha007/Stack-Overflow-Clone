@@ -1,15 +1,15 @@
-import React from 'react';
+import React from 'react'
 import Leftsidebar from '../../Component/Leftsidebar/Leftsidebar'
 import Rightsidebar from '../../Component/Rightsidebar/Rightsidebar'
-import Questiondetails from './Questiondetails'
-const Displayquestion = ({slideIn}) => {
+import Qustiondetails from './Qustiondetails'
+const Displayquestion = ({slidein}) => {
   return (
     <div className="home-container-1">
-        <Leftsidebar slideIn={slideIn} />
-        <div className="home-container-1">
-            <Questiondetails/>
-            <Rightsidebar/>
-        </div>
+      <Leftsidebar slidein={slidein}/>
+      <div className="home-container-2">
+        <Qustiondetails/>
+        <Rightsidebar/>
+      </div>
     </div>
   )
 }

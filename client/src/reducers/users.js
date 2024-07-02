@@ -1,7 +1,4 @@
-const initialState = {
-    currentUser:null
-}
-const usersReducer =(states=initialState,action)=>{
+const usersreducer =(states=[],action)=>{
     switch (action.type) {
         case "FETCH_USERS":
             return action.payload;
@@ -12,4 +9,4 @@ const usersReducer =(states=initialState,action)=>{
             return states;
     }
 }
-export default usersReducer;
+export default usersreducer;

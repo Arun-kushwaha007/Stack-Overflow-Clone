@@ -6,22 +6,18 @@ function Avatar({
     px,
     py,
     color,
-    borderRadius,
-    fontSize,
-    cursor
+    borderRadius,fontSize,cursor
 }) {
-
-    const style = {
+    const style={
         backgroundColor,
-        padding: `${py} ${px}`,
-        color: color|| 'black',
+        padding:`${py} ${px}`,
+        color:color|| "black",
         borderRadius,
         fontSize,
-        textAlign: "center",
-        cursor: cursor|| null,
-        textDecoration: "none"
+        textAlign:"center",
+        cursor:cursor || null,
+        textDecoration:"none"
     };
-
   return (
     <div style={style}>{children}</div>
   )
