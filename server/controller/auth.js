@@ -25,7 +25,6 @@ export const signup = async(req,res)=>{
         res.status(500).json( "Something went wrong");
         return
     }
-<<<<<<< HEAD
 };
 
 export const login = async (req,res)=>{
@@ -51,6 +50,4 @@ export const login = async (req,res)=>{
         res.status(500).json("something went wrong...")
         return
     }
-=======
->>>>>>> parent of 7cbe3ca (server auth)
 }
