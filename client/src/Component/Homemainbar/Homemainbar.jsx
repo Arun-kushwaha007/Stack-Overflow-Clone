@@ -3,6 +3,7 @@ import './Homemainbar.css'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import Questionlist from './Questionlist'
+import Videoplayer from '../VideoPlayer/Videoplayer'
 function Homemainbar() {
   const user = useSelector((state)=>state.currentuserreducer)
   const location = useLocation();
@@ -37,6 +38,7 @@ function Homemainbar() {
           </>
         )
         }</div>
+        <Videoplayer/>
     </div>
   )
 }
