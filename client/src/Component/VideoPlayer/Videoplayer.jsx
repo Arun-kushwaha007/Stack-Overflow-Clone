@@ -1,20 +1,22 @@
-import React, { useRef, useState } from 'react';
-import './videoplayer.css';
+import React, { useRef, useState } from "react";
+import "./videoplayer.css";
 
 const resolutions = {
-  '144p': { width: 256, height: 144 },
-  '240p': { width: 426, height: 240 },
-  '320p': { width: 568, height: 320 },
-  '480p': { width: 854, height: 480 },
-  '720p': { width: 1280, height: 720 },
-  '1080p': { width: 1920, height: 1080 },
+  "144p": { width: 256, height: 144 },
+  "240p": { width: 426, height: 240 },
+  "320p": { width: 568, height: 320 },
+  "480p": { width: 854, height: 480 },
+  "720p": { width: 1280, height: 720 },
+  "1080p": { width: 1920, height: 1080 },
 };
 
 const Videoplayer = () => {
   const mediaRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [lastTap, setLastTap] = useState(0);
-  const [resolution, setResolution] = useState('720p');
+  const skipIntervalRef = useRef(null);
+  const fastForwardIntervalRef = useRef(null);
+  const [resolution, setResolution] = useState("720p");
 
   const handlePlayPause = () => {
     if (mediaRef.current.paused) {
@@ -33,7 +35,7 @@ const Videoplayer = () => {
   const handleFullScreen = () => {
     if (mediaRef.current.requestFullscreen) {
       mediaRef.current.requestFullscreen();
-    } 
+    }
   };
 
   const handleFileUpload = (event) => {
@@ -50,7 +52,7 @@ const Videoplayer = () => {
   };
 
   const handleDoubleTap = (e) => {
-    e.preventDefault();// prevnting the default brower settings
+    e.preventDefault(); // Prevent default browser behavior
     const currentTime = new Date().getTime();
     const tapLength = currentTime - lastTap;
 
@@ -59,17 +61,39 @@ const Videoplayer = () => {
       const videoWidth = mediaRef.current.clientWidth;
 
       if (touchX < videoWidth / 3) {
-        // Double tap on the left
-        mediaRef.current.currentTime -= 5; // Move 5 seconds backward
+        // Double tap on the left side
+        mediaRef.current.currentTime -= 5;
       } else if (touchX > (2 * videoWidth) / 3) {
-        // Double tap on the right
-        mediaRef.current.currentTime += 10; // Move 10 seconds forward
+        // Double tap on the right side
+        mediaRef.current.currentTime += 10;
       } else {
         // Double tap in the middle
-        handlePlayPause(); // Play/Pause the video
+        handlePlayPause();
       }
     }
     setLastTap(currentTime);
+  };
+
+  const handleSkip = (e) => {
+    const touchX = e.nativeEvent.offsetX;
+    const videoWidth = mediaRef.current.clientWidth;
+
+    if (touchX < videoWidth / 3) {
+      // Press and hold on the left side
+      skipIntervalRef.current = setInterval(() => {
+        mediaRef.current.currentTime -= 0.1 * 3;
+      }, 100);
+    } else if (touchX > (2 * videoWidth) / 3) {
+      // Press and hold on the right side
+      fastForwardIntervalRef.current = setInterval(() => {
+        mediaRef.current.currentTime += 0.1 * 2; // Fast forward at 2x speed
+      }, 100);
+    }
+  };
+
+  const handleMouseUpOrLeave = () => {
+    clearInterval(skipIntervalRef.current);
+    clearInterval(fastForwardIntervalRef.current);
   };
 
   return (
@@ -80,12 +104,23 @@ const Videoplayer = () => {
         controls={false}
         className="video-element"
         onClick={handleDoubleTap}
-        onDoubleClick={(e) => e.preventDefault()} // Prevent double-click from exiting fullscreen
+        onDoubleClick={(e) => e.preventDefault()}
+        onMouseDown={handleSkip}
+        onMouseUp={handleMouseUpOrLeave}
+        onMouseLeave={handleMouseUpOrLeave}
       ></video>
       <div className="controls">
-        <button onClick={handlePlayPause}>{isPlaying ? 'Pause' : 'Play'}</button>
+        <button onClick={handlePlayPause}>
+          {isPlaying ? "Pause" : "Play"}
+        </button>
         <button onClick={handleFullScreen}>Full Screen</button>
-        <input type="range" min="0" max="1" step="0.01" onChange={handleVolumeChange} />
+        <input
+          type="range"
+          min="0"
+          max="1"
+          step="0.01"
+          onChange={handleVolumeChange}
+        />
         <select value={resolution} onChange={handleResolutionChange}>
           <option value="144p">144p</option>
           <option value="240p">240p</option>
