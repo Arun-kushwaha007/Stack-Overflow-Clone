@@ -86,11 +86,12 @@ const Videoplayer = () => {
     } else if (touchX > (2 * videoWidth) / 3) {
       // Press and hold on the right side
       fastForwardIntervalRef.current = setInterval(() => {
-        mediaRef.current.currentTime += 0.1 * 2; // Fast forward at 2x speed
+        mediaRef.current.currentTime += 0.1 * 2; 
       }, 100);
     }
   };
 
+  // time to clean the saved state of the mouse.
   const handleMouseUpOrLeave = () => {
     clearInterval(skipIntervalRef.current);
     clearInterval(fastForwardIntervalRef.current);
