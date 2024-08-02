@@ -2,6 +2,7 @@ import axios from "axios";
 
 const API=axios.create({
     baseURL:"https://stack-overflow-clone-z3y9.onrender.com"
+    // baseURL:"https://localhost:5000"
 });
 
 API.interceptors.request.use((req)=>{
@@ -24,6 +25,8 @@ export const getallquestions=()=>API.get("/questions/get");
 export const deletequestion=(id)=>API.delete(`/questions/delete/${id}`);
 export const votequestion=(id,value)=>API.patch(`/questions/vote/${id}`,{value});
 
+export const createRoom = (roomName) =>
+    API.post("/api/chatRoom/create", { name: roomName });
 
 export const postanswer=(id,noofanswers,answerbody,useranswered)=>API.patch(`/answer/post/${id}`,{noofanswers,answerbody,useranswered});
 export const deleteanswer=(id,answerid,noofanswers)=>API.patch(`/answer/delete/${id}`,{answerid,noofanswers});
