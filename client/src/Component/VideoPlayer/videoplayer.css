@@ -1,59 +1,106 @@
 .video-player {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-    background-color: #000;
-    overflow: hidden;
-    position: relative;
-  }
-  
-  .video-element {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures the video covers the entire container */
-    background: black;
-  }
-  
-  .controls {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 90%;
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border-radius: 5px;
-  }
-  
-  .controls button,
-  .controls input[type="range"],
-  .controls select {
-    margin: 0 5px;
-  }
-  
-  .controls button {
-    background-color: #555;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-  }
-  
-  .controls button:hover {
-    background-color: #777;
-  }
-  
-  .controls input[type="range"] {
-    flex-grow: 1;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  overflow: hidden;
+  position: relative;
+  font-family: 'Arial', sans-serif;
+}
+
+.video-element {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  background: black;
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.controls {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  transition: opacity 0.3s ease;
+}
+
+.controls button,
+.controls input[type="range"],
+.controls select {
+  margin: 0 10px;
+}
+
+.controls button {
+  background-color: #1f1f1f;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.controls button:hover {
+  background-color: #ff6600;
+  transform: scale(1.1);
+}
+
+.controls input[type="range"] {
+  flex-grow: 1;
+  appearance: none;
+  background: #555;
+  height: 5px;
+  border-radius: 5px;
+  outline: none;
+  transition: background 0.3s ease;
+}
+
+.controls input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  background: #ff6600;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.controls input[type="range"]:hover {
+  background: #777;
+}
+
+.controls select {
+  background-color: #1f1f1f;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.controls select:hover {
+  background-color: #ff6600;
+}
+
+.play-btn {
+  margin-right: auto;
+}
+
+.volume {
+  max-width: 120px;
+}
