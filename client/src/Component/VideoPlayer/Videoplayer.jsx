@@ -1,8 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./videoplayer.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faVolumeOff } from '@fortawesome/free-regular-svg-icons'
-
+import { faVolumeOff } from '@fortawesome/free-solid-svg-icons';
 
 const resolutions = {
   "144p": { width: 256, height: 144 },
@@ -24,6 +23,7 @@ const Videoplayer = () => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [showControls, setShowControls] = useState(true);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const hideControlsTimeoutRef = useRef(null);
 
   useEffect(() => {
@@ -93,6 +93,7 @@ const Videoplayer = () => {
     if (file && mediaRef.current) {
       const url = URL.createObjectURL(file);
       mediaRef.current.src = url;
+      setIsVideoLoaded(true);
     }
   };
 
@@ -169,17 +170,17 @@ const Videoplayer = () => {
 
   return (
     <div className="video-player" onMouseMove={handleMouseMove}>
-      <input type="file" accept="video/*" onChange={handleFileUpload} />
+      <input className="upload-file" type="file" accept="video/*" onChange={handleFileUpload} />
       <video ref={mediaRef} style={{ display: "none" }} />
       <canvas
         ref={canvasRef}
-        className="video-element"
+        className={`video-element ${isVideoLoaded ? 'loaded' : 'unloaded'}`}
         onClick={handleDoubleTap}
         onMouseDown={handleSkip}
         onMouseUp={handleMouseUpOrLeave}
         onMouseLeave={handleMouseUpOrLeave}
       ></canvas>
-      {showControls && (
+      {showControls && isVideoLoaded && (
         <div className="controls">
           <button className="play-btn" onClick={handlePlayPause}>
             {isPlaying ? "Pause" : "Play"}

@@ -73,7 +73,7 @@
   appearance: none;
   width: 15px;
   height: 15px;
-  background: #ff6600;
+  background: #fe6601cc;
   border-radius: 50%;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -94,7 +94,7 @@
 }
 
 .controls select:hover {
-  background-color: #ff6600;
+  background-color: #fe6601;
 }
 
 .play-btn {
@@ -104,3 +104,21 @@
 .volume {
   max-width: 120px;
 }
+
+
+.upload-file {
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #1f1f1f;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.upload-file:hover {
+  background-color: #333;
+}
+
