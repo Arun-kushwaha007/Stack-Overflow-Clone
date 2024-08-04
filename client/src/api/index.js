@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const API=axios.create({
-    baseURL:"https://stack-overflow-clone-z3y9.onrender.com"
-    // baseURL:"https://localhost:5000"
+    // baseURL:"https://stack-overflow-clone-z3y9.onrender.com"
+    baseURL:"http://localhost:5000"
 });
 
 API.interceptors.request.use((req)=>{
@@ -27,6 +27,13 @@ export const votequestion=(id,value)=>API.patch(`/questions/vote/${id}`,{value})
 
 export const createRoom = (roomName) =>
     API.post("/api/chatRoom/create", { name: roomName });
+
+export const joinRoom = (roomId) =>
+    API.post(`/api/chatRoom/join/${roomId}`);
+
+export const leaveRoom = (roomId) =>
+    API.post(`/api/chatRoom/leave/${roomId}`);
+
 
 export const postanswer=(id,noofanswers,answerbody,useranswered)=>API.patch(`/answer/post/${id}`,{noofanswers,answerbody,useranswered});
 export const deleteanswer=(id,answerid,noofanswers)=>API.patch(`/answer/delete/${id}`,{answerid,noofanswers});

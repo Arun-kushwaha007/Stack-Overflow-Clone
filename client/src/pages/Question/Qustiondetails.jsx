@@ -17,7 +17,8 @@ const Qustiondetails = () => {
     const user =useSelector((state)=>state.currentuserreducer)
     const location=useLocation()
     const navigate=useNavigate()
-    const url="https://stack-overflow-clone-z3y9.onrender.com"
+    // const url="https://stack-overflow-clone-z3y9.onrender.com"
+    const url="http://localhost:5000"
     const handlepostans=(e,answerlength)=>{
         e.preventDefault();
         if(user ===null){

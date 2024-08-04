@@ -8,6 +8,7 @@ import Displayquestion from './pages/Question/Displayquestion'
 import Tags from './pages/Tags/Tags'
 import Users from './pages/Users/Users'
 import Userprofile from './pages/Userprofile/Userprofile'
+import ChatRoom from './Component/ChatRoom/ChatRoom'
 function Allroutes({slidein,handleslidein}) {
   return (
     <Routes>
@@ -19,6 +20,7 @@ function Allroutes({slidein,handleslidein}) {
         <Route path='/Tags' element={<Tags slidein={slidein} handleslidein={handleslidein}/>}/>
         <Route path='/Users' element={<Users slidein={slidein} handleslidein={handleslidein}/>}/>
         <Route path='/Users/:id' element={<Userprofile slidein={slidein} handleslidein={handleslidein}/>}/>
+        <Route path='/ChatRoom' element={<ChatRoom slidein={slidein} handleslidein={handleslidein}/>}/>
     </Routes>
   )
 }

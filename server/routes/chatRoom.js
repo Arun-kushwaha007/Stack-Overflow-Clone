@@ -1,13 +1,10 @@
-// import express from 'express';
+import express from 'express';
+import { createChatRoom, joinChatRoom, leaveChatRoom } from '../controller/ChatRoom.js';
 
-import { createChatRoom,joinChatRoom,leaveChatRoom } from '../controller/ChatRoom.js';
+const router = express.Router();
 
-import auth from '../middleware/auth.js';
-
-const router=express.Router();
-
-router.post('/create', auth, createChatRoom);
-router.post('/join/:id', auth, joinChatRoom);
-router.post('/leave/:id', auth, leaveChatRoom);
+router.post('/create', createChatRoom);
+router.post('/join/:id', joinChatRoom);
+router.post('/leave/:id', leaveChatRoom); // Ensure this route is correctly defined
 
 export default router;

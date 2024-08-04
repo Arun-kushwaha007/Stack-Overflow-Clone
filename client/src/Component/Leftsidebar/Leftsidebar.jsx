@@ -37,6 +37,11 @@ const Leftsidebar = ({ slidein }) => {
             <p >Users</p>
             </NavLink>
           </button>
+          <button className='nav-btnn'>
+            <NavLink to='/ChatRoom' className='side-nav-links' activeclassname='active' style={{paddingLeft:"40px"}}>
+            <p >ChatRoom</p>
+            </NavLink>
+          </button>
         </div>
       </nav>
     </div>

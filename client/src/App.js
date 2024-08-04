@@ -7,6 +7,7 @@ import Allroutes from './Allroutes'
 import { useDispatch } from 'react-redux';
 import { fetchallquestion } from './action/question';
 import ChatRoom from './Component/ChatRoom/ChatRoom';
+
 function App() {
   const [slidein,setslidein]=useState(true)
   const dispatch=useDispatch()
@@ -31,7 +32,6 @@ useEffect(()=>{
       <Router>
       <Navbar handleslidein={handleslidein}/>
       <Allroutes slidein={slidein} handleslidein={handleslidein}/>
-      <ChatRoom/>
       </Router>
     </div>
   );
