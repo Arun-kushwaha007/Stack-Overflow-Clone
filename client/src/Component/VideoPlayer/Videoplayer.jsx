@@ -153,7 +153,7 @@ const Videoplayer = () => {
     clearTimeout(hideControlsTimeoutRef.current);
     hideControlsTimeoutRef.current = setTimeout(() => {
       setShowControls(false);
-    }, 3000); // Hide controls after 3 seconds of inactivity
+    }, 3000); 
   };
 
   const handleMouseMove = () => {

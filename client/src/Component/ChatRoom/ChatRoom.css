@@ -1,9 +1,10 @@
-/* src/Component/ChatRoom/ChatRoom.css */
+
 .chat-room {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding: 20px;
+    margin-top: 100px;
   }
   
   .room-list {

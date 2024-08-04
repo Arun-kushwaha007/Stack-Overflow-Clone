@@ -15,7 +15,13 @@ app.use(express.urlencoded({ limit: "30mb", extended: true }))
 app.use(cors());
 
 const server = http.createServer(app);
-const io = new SocketIOServer(server);
+const io = new SocketIOServer(server, {
+    cors: {
+        origin: "http://localhost:3000", // Adjust as needed
+        methods: ["GET", "POST"]
+    }
+});
+
 
 app.use("/user", userroutes);
 app.use('/questions', questionroutes)

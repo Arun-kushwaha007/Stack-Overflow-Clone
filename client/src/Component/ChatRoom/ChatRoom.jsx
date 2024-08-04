@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './ChatRoom.css'; // Import CSS for styling
+import './ChatRoom.css';
+import Leftsidebar from '../Leftsidebar/Leftsidebar';
 
 const ChatRoom = () => {
     const [roomName, setRoomName] = useState('');
@@ -8,11 +9,11 @@ const ChatRoom = () => {
     const [selectedRoom, setSelectedRoom] = useState(null);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
+    const [joinedRooms, setJoinedRooms] = useState({});
 
-    const token = localStorage.getItem('token'); // Adjust based on your storage method
-
+    const token = localStorage.getItem('token'); 
     useEffect(() => {
-        // Fetch available chat rooms
+        
         const fetchRooms = async () => {
             try {
                 const response = await axios.get('http://localhost:5000/api/chatRoom', {
@@ -24,6 +25,25 @@ const ChatRoom = () => {
             }
         };
         fetchRooms();
+    }, [token]);
+
+    useEffect(() => {
+       
+        const fetchJoinedRooms = async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/api/chatRoom/joinedRooms', {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                const roomsMap = response.data.reduce((acc, room) => {
+                    acc[room._id] = room;
+                    return acc;
+                }, {});
+                setJoinedRooms(roomsMap);
+            } catch (error) {
+                console.error("Error fetching joined rooms:", error.response || error.message);
+            }
+        };
+        fetchJoinedRooms();
     }, [token]);
 
     const createRoom = async () => {
@@ -48,7 +68,6 @@ const ChatRoom = () => {
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             setSelectedRoom(response.data);
-            // Fetch messages for the selected room
             const messagesResponse = await axios.get(
                 `http://localhost:5000/api/chatRoom/messages/${roomId}`,
                 { headers: { Authorization: `Bearer ${token}` } }
@@ -58,6 +77,7 @@ const ChatRoom = () => {
             console.error("Error joining room:", error.response || error.message);
         }
     };
+    
 
     const leaveRoom = async (roomId) => {
         try {
@@ -66,6 +86,11 @@ const ChatRoom = () => {
                 {},
                 { headers: { Authorization: `Bearer ${token}` } }
             );
+            setJoinedRooms(prev => {
+                const newJoinedRooms = { ...prev };
+                delete newJoinedRooms[roomId];
+                return newJoinedRooms;
+            });
             if (selectedRoom && selectedRoom._id === roomId) {
                 setSelectedRoom(null);
                 setMessages([]);
@@ -104,8 +129,14 @@ const ChatRoom = () => {
                     {rooms.map(room => (
                         <li key={room._id}>
                             {room.name}
-                            <button onClick={() => joinRoom(room._id)}>Join</button>
-                            <button onClick={() => leaveRoom(room._id)}>Leave</button>
+                            {joinedRooms[room._id] ? (
+                                <>
+                                    <button onClick={() => joinRoom(room._id)}>Join</button>
+                                    <button onClick={() => leaveRoom(room._id)}>Leave</button>
+                                </>
+                            ) : (
+                                <button onClick={() => joinRoom(room._id)}>Join</button>
+                            )}
                         </li>
                     ))}
                 </ul>
