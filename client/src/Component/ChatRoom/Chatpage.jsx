@@ -1,17 +1,16 @@
-import React from 'react'
-import Leftsidebar from '../../Component/Leftsidebar/Leftsidebar'
-import ChatRoom from './ChatRoom'
+import React from 'react';
+import Leftsidebar from '../../Component/Leftsidebar/Leftsidebar';
+import ChatRoom from './ChatRoom';
 
-const ChatPage = ({slidein}) => {
+const ChatPage = ({ slidein }) => {
   return (
     <div className="home-container-1">
-      <Leftsidebar slidein={slidein}/>
+      <Leftsidebar slidein={slidein} />
       <div className="home-container-2">
-        <ChatRoom/>
-        
+        <ChatRoom />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ChatPage
+export default ChatPage;

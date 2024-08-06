@@ -38,7 +38,10 @@ function Homemainbar() {
           </>
         )
         }</div>
+        <div className="videoPlayer">
+          
         <Videoplayer/>
+        </div>
     </div>
   )
 }

@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './ChatRoom.css';
-import Leftsidebar from '../Leftsidebar/Leftsidebar';
+import User from '../../pages/Users/User';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const ChatRoom = () => {
+    const navigate = useNavigate();
     const [roomName, setRoomName] = useState('');
     const [rooms, setRooms] = useState([]);
     const [selectedRoom, setSelectedRoom] = useState(null);
@@ -11,9 +14,36 @@ const ChatRoom = () => {
     const [newMessage, setNewMessage] = useState('');
     const [joinedRooms, setJoinedRooms] = useState({});
 
-    const token = localStorage.getItem('token'); 
+    const users = useSelector((state) => state.usersreducer);
+    const token = localStorage.getItem('token');
+    const user = useSelector((state) => state.currentuserreducer);
+
+    const checkauth = () => {
+        if (!user) {
+            alert("Login or signup to create a chat room");
+            navigate("/Auth");
+            return false;
+        }
+        return true;
+    };
+
+    const handleCreateRoom = async () => {
+        if (checkauth()) {
+            try {
+                const response = await axios.post(
+                    'http://localhost:5000/api/chatRoom/create',
+                    { name: roomName },
+                    { headers: { Authorization: `Bearer ${token}` } }
+                );
+                setRooms([...rooms, response.data]);
+                setRoomName('');
+            } catch (error) {
+                console.error("Error creating room:", error.response || error.message);
+            }
+        }
+    };
+
     useEffect(() => {
-        
         const fetchRooms = async () => {
             try {
                 const response = await axios.get('http://localhost:5000/api/chatRoom', {
@@ -28,7 +58,6 @@ const ChatRoom = () => {
     }, [token]);
 
     useEffect(() => {
-       
         const fetchJoinedRooms = async () => {
             try {
                 const response = await axios.get('http://localhost:5000/api/chatRoom/joinedRooms', {
@@ -45,20 +74,6 @@ const ChatRoom = () => {
         };
         fetchJoinedRooms();
     }, [token]);
-
-    const createRoom = async () => {
-        try {
-            const response = await axios.post(
-                'http://localhost:5000/api/chatRoom/create', 
-                { name: roomName },
-                { headers: { Authorization: `Bearer ${token}` } }
-            );
-            setRooms([...rooms, response.data]);
-            setRoomName('');
-        } catch (error) {
-            console.error("Error creating room:", error.response || error.message);
-        }
-    };
 
     const joinRoom = async (roomId) => {
         try {
@@ -77,7 +92,6 @@ const ChatRoom = () => {
             console.error("Error joining room:", error.response || error.message);
         }
     };
-    
 
     const leaveRoom = async (roomId) => {
         try {
@@ -119,12 +133,14 @@ const ChatRoom = () => {
     return (
         <div className="chat-room">
             <div className="room-list">
-                <input 
-                    value={roomName} 
-                    onChange={e => setRoomName(e.target.value)} 
-                    placeholder="Room name" 
-                />
-                <button onClick={createRoom}>Create Room</button>
+                <div className="room-name">
+                    <input
+                        value={roomName}
+                        onChange={e => setRoomName(e.target.value)}
+                        placeholder="Room name"
+                    />
+                    <button onClick={handleCreateRoom}>Create Room</button>
+                </div>
                 <ul>
                     {rooms.map(room => (
                         <li key={room._id}>
@@ -140,6 +156,17 @@ const ChatRoom = () => {
                         </li>
                     ))}
                 </ul>
+                <div className="search">
+                    <input type="text" placeholder='Search' />
+                    <button>Invite</button>
+                </div>
+                <div className="users">
+                    <div className="user-list-container">
+                        {users.map((user) => (
+                            <User user={user} key={user?._id} />
+                        ))}
+                    </div>
+                </div>
             </div>
             {selectedRoom && (
                 <div className="chat-window">
