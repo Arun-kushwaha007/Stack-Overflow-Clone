@@ -14,8 +14,8 @@ const ChatRoom = () => {
   const [newMessage, setNewMessage] = useState('');
   const [joinedRooms, setJoinedRooms] = useState({});
   const [selectedUsers, setSelectedUsers] = useState([]);
-  const [searchValue, setSearchValue] = useState(''); // State for the textarea value
-  const [filteredUsers, setFilteredUsers] = useState([]); // State for filtered users
+  const [searchValue, setSearchValue] = useState('');
+  const [filteredUsers, setFilteredUsers] = useState([]);
 
   const users = useSelector((state) => state.usersreducer);
   const token = localStorage.getItem('token');
@@ -59,11 +59,16 @@ const ChatRoom = () => {
         const response = await axios.get('http://localhost:5000/api/chatRoom', {
           headers: { Authorization: `Bearer ${token}` }
         });
-        setRooms(response.data);
+        if (Array.isArray(response.data)) {
+          setRooms(response.data);
+        } else {
+          console.error('Unexpected response format:', response.data);
+        }
       } catch (error) {
         console.error("Error fetching chat rooms:", error.response || error.message);
       }
     };
+    
     fetchRooms();
   }, [token]);
 
@@ -179,12 +184,11 @@ const ChatRoom = () => {
           ))}
         </ul>
         <div className="search">
-          <textarea
+          <input 
             placeholder='Search users'
-            value={searchValue} // Bind this value to the textarea
-            onChange={e => setSearchValue(e.target.value)} // Update the textarea value
+            value={searchValue}
+            onChange={e => setSearchValue(e.target.value)}
           />
-          <button>Invite</button>
         </div>
         <div className="users">
           <div className="user-list-container">

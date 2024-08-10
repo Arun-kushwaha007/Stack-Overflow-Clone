@@ -1,5 +1,5 @@
 Main Features :
-1. Users can search for a user
+1. Users can search for a user  ///
 2. User can send invitaion to other users
 3. The user will be notifed about the request
 4. Users can accept or reject the friend request.

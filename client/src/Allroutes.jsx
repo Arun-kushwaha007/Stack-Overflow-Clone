@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes,Route } from 'react-router-dom'
+import { Routes,Route, useLocation} from 'react-router-dom'
 import Home from './pages/Home/Home'
 import Askquestion from './pages/Askquestion/Askquestion'
 import Auth from './pages/Auth/Auth'
@@ -10,8 +10,13 @@ import Users from './pages/Users/Users'
 import Userprofile from './pages/Userprofile/Userprofile'
 // import ChatRoom from './Component/ChatRoom/ChatRoom'
 import ChatPage from './Component/ChatRoom/Chatpage'
+import Invite from './pages/Users/Invite'
 function Allroutes({slidein,handleslidein}) {
+  const location = useLocation();
+
   return (
+    <>
+    {location.pathname ==="/ChatRoom" && <Invite/>}
     <Routes>
         <Route path='/' element={<Home slidein={slidein} handleslidein={handleslidein}/>}/>
         <Route path='/Askquestion' element={<Askquestion />}/>
@@ -23,6 +28,7 @@ function Allroutes({slidein,handleslidein}) {
         <Route path='/Users/:id' element={<Userprofile slidein={slidein} handleslidein={handleslidein}/>}/>
         <Route path='/ChatRoom' element={<ChatPage slidein={slidein} handleslidein={handleslidein}/>}/>
     </Routes>
+    </>
   )
 }
 
