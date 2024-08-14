@@ -1,0 +1,21 @@
+
+
+.home-container-1{
+    display: flex;
+    position: relative;
+}
+
+.nav{
+    display: flex;
+    margin-top: 20px;
+    background-color: black;
+    max-height: 70px;
+    position: absolute;
+    left: 200px;
+    
+}
+.main{
+    background-color: aqua;
+    margin-top: 10px;
+    min-width: 500px;
+}
