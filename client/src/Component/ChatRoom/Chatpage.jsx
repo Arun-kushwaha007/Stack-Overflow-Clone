@@ -2,8 +2,9 @@ import React from 'react';
 import Leftsidebar from '../../Component/Leftsidebar/Leftsidebar';
 import ChatRoom from './ChatRoom';
 import HeaderChatRoom from './HeaderChatRoom';
-import Chatlist from './spec/ChatList';
+import ChatList from './spec/ChatList';
 import "./Chatpage.css"
+import { sampleChats } from './constants/sampleData';
 
 const ChatPage = ({ slidein }) => {
   return (
@@ -18,7 +19,7 @@ const ChatPage = ({ slidein }) => {
       </div>
       <div className="main">
 
-          <Chatlist chats={[1,2,3,4,5]}/>
+          <ChatList chats={sampleChats}/>
       </div>
       
     </div>

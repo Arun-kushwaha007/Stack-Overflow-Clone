@@ -1,6 +1,8 @@
 import React from 'react'
+import Chatitem from '../shared/Chatitem';
 
-const Chatlist = ({
+const ChatList = ({
+    
   chats=[],
   chatId,
   onlineUsers =[],
@@ -19,12 +21,25 @@ return (
   
   <div  className=''>
       {
-          chats?.map((data)=>{
-              return <div>{data}</div>
+          chats?.map((data,index)=>{
+
+            const {_id, name, groupChat, members}= data;
+            const newMessagesAlert = newMessagesAlert.find((alert)=> chatId === _id);
+
+            const isOnline = members?.some((member)=>onlineUsers.includes(_id));
+              return <Chatitem
+              index={index}  newMessagesAlert={newMessagesAlert}  isOnline={isOnline}
+            name={name}
+            _id={_id}
+            keys={_id}
+            groupChat={groupChat}
+            sameSender={chatId=== _id}
+            handleDeletChatOpen={handleDeletChat}
+              />
           })
       }
   </div>
 )
 }
 
-export default Chatlist;
+export default ChatList;

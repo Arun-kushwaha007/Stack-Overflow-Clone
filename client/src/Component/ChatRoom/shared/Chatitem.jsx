@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{memo} from 'react'
 import { Link } from 'react-router-dom'
 
 const Chatitem = (
@@ -26,4 +26,4 @@ const Chatitem = (
   </Link>
 }
 
-export default Chatitem
+export default memo(Chatitem);
